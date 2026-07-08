@@ -11,7 +11,6 @@ def get_selic_rate() -> str:
         str: Dados formatados da taxa Selic diária.
     """
     try:
-        # Série 11: Taxa de juros - Selic acumulada no dia (% a.a.)
         url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/30?formato=json"
         response = requests.get(url)
         if response.status_code != 200:
@@ -20,11 +19,9 @@ def get_selic_rate() -> str:
         data = response.json()
         df = pd.DataFrame(data)
         
-        # Tratamento de dados com Pandas
         df['data'] = pd.to_datetime(df['data'], format='%d/%m/%Y')
         df['valor'] = pd.to_numeric(df['valor'])
         
-        # Ajusta exibição
         df.columns = ['Data', 'Taxa Diária (% a.a.)']
         df['Data'] = df['Data'].dt.date
         

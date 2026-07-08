@@ -2,7 +2,6 @@ import sys
 import os
 import pandas as pd
 
-# Aponta para a raiz do projeto
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src import config
@@ -10,7 +9,6 @@ from src import config
 def inspect_csv():
     file_path = config.RAW_DATA_DIR / "TaxaReferencia_PRE_20260707.csv"
 
-    # Lê o CSV com Pandas — se tiver separador diferente de vírgula, mude o sep
     df = pd.read_csv(file_path, sep=";", encoding="latin-1")
 
     print(f"Dimensões: {df.shape[0]} linhas x {df.shape[1]} colunas")

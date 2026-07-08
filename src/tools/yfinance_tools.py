@@ -20,12 +20,10 @@ def get_stock_history(ticker: str, period: str = "1mo") -> str:
         if df.empty:
             return f"Nenhum dado histórico encontrado para o ativo '{ticker}'."
             
-        # Seleciona apenas as colunas mais importantes e limpa o índice
         df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
-        df.index = df.index.date  # Remove fuso horário e mantém apenas a data
+        df.index = df.index.date  
         df = df.round(2)
         
-        # Converte em string formatada do Pandas
         return f"\nHistórico de Cotações para {ticker} ({period}):\n" + df.to_string()
     except Exception as e:
         return f"Erro ao obter dados de cotações para o ativo {ticker}: {str(e)}"
